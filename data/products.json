@@ -1,67 +1,105 @@
 {
   "generated_at": "2026-11-16",
-  "updated_at": "08:16 WIB",
+  "updated_at": "21:19 WIB",
+  "source": "csv",
+  "total_fetched": 3,
   "total_candidates": 3,
+  "new_today": 3,
+  "weights": {
+    "popularitas": 30,
+    "komisi": 30,
+    "rating": 20,
+    "harga": 10,
+    "momentum": 10
+  },
+  "warnings": [],
   "products": [
     {
+      "id": null,
       "name": "Contoh Organizer Rumah",
       "category": "Home & Living",
       "price": 35000.0,
       "commission_rate": 10.0,
+      "commission_amount": null,
       "sales": 840.0,
       "rating": 4.7,
       "review_count": 180,
+      "shop_name": null,
       "image_url": "https://placehold.co/600x600?text=Organizer",
       "product_url": "https://shopee.co.id/product/contoh-organizer",
       "affiliate_url": "https://shopee.co.id/product/contoh-organizer",
-      "score": 93,
+      "source": "csv",
+      "tags": [],
+      "sales_growth_pct": null,
+      "score": 87,
       "score_breakdown": {
         "popularitas": 88,
         "komisi": 100,
-        "rating": 94,
-        "harga": 92
+        "rating": 85,
+        "harga": 92,
+        "momentum": 50
       },
-      "recommendation_reason": "Kandidat menarik: memiliki data penjualan, komisi 10%, rating tinggi, harga relatif terjangkau."
+      "days_featured_recently": 0,
+      "is_new": true,
+      "recommendation_reason": "Komisi tinggi 10%, harga ramah impulse-buy."
     },
     {
+      "id": null,
       "name": "Contoh Mini Chopper",
       "category": "Peralatan Rumah",
       "price": 59000.0,
       "commission_rate": 8.0,
+      "commission_amount": null,
       "sales": 1250.0,
       "rating": 4.8,
       "review_count": 320,
+      "shop_name": null,
       "image_url": "https://placehold.co/600x600?text=Chopper",
       "product_url": "https://shopee.co.id/product/contoh-chopper",
       "affiliate_url": "https://shopee.co.id/product/contoh-chopper",
-      "score": 91,
+      "source": "csv",
+      "tags": [],
+      "sales_growth_pct": null,
+      "score": 85,
       "score_breakdown": {
         "popularitas": 93,
         "komisi": 80,
-        "rating": 96,
-        "harga": 100
+        "rating": 90,
+        "harga": 100,
+        "momentum": 50
       },
-      "recommendation_reason": "Kandidat menarik: memiliki data penjualan, komisi 8%, rating tinggi, harga relatif terjangkau."
+      "days_featured_recently": 0,
+      "is_new": true,
+      "recommendation_reason": "1.250 terjual, komisi tinggi 8%, rating 4.8, harga ramah impulse-buy."
     },
     {
+      "id": null,
       "name": "Contoh Kipas Portable",
       "category": "Elektronik",
       "price": 45000.0,
       "commission_rate": 5.0,
+      "commission_amount": null,
       "sales": 2200.0,
       "rating": 4.9,
       "review_count": 540,
+      "shop_name": null,
       "image_url": "https://placehold.co/600x600?text=Fan",
       "product_url": "https://shopee.co.id/product/contoh-fan",
       "affiliate_url": "https://shopee.co.id/product/contoh-fan",
-      "score": 84,
+      "source": "csv",
+      "tags": [],
+      "sales_growth_pct": null,
+      "score": 79,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 50,
-        "rating": 98,
-        "harga": 96
+        "rating": 95,
+        "harga": 96,
+        "momentum": 50
       },
-      "recommendation_reason": "Kandidat menarik: memiliki data penjualan, komisi 5%, rating tinggi, harga relatif terjangkau."
+      "days_featured_recently": 0,
+      "is_new": true,
+      "recommendation_reason": "2.200 terjual, komisi 5%, rating 4.9, harga ramah impulse-buy."
     }
   ]
 }

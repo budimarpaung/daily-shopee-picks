@@ -1,0 +1,47 @@
+{
+  "_info": "Konfigurasi riset harian. Setiap entri di 'queries' adalah satu pencarian ke Shopee Affiliate Open API. 'category' adalah label yang ditampilkan di website. sort: sales | commission | relevance | price_low | price_high. list: top_performing | all.",
+
+  "top_n": 24,
+  "max_per_category": 5,
+  "max_per_shop": 2,
+
+  "filters": {
+    "min_rating": 4.5,
+    "min_sales": 50,
+    "min_price": 10000,
+    "max_price": 500000,
+    "min_commission_rate": 2,
+    "exclude_keywords": ["dewasa", "rokok", "vape", "obat keras"]
+  },
+
+  "freshness": {
+    "_info": "Produk yang sudah tampil dalam N hari terakhir diberi penalti skor supaya rekomendasi berganti tiap hari.",
+    "lookback_days": 3,
+    "penalty_per_appearance": 0.07
+  },
+
+  "defaults": {
+    "limit": 50,
+    "pages": 1,
+    "sort": "sales"
+  },
+
+  "queries": [
+    {"category": "Top Performing", "list": "top_performing", "sort": "sales", "pages": 2},
+    {"category": "Komisi Tinggi", "list": "all", "sort": "commission", "pages": 2, "ams_only": true},
+
+    {"category": "Home & Living", "keyword": "organizer rumah"},
+    {"category": "Home & Living", "keyword": "rak dapur"},
+    {"category": "Peralatan Dapur", "keyword": "chopper"},
+    {"category": "Peralatan Dapur", "keyword": "air fryer"},
+    {"category": "Elektronik", "keyword": "kipas portable"},
+    {"category": "Elektronik", "keyword": "tws bluetooth"},
+    {"category": "Aksesoris HP", "keyword": "charger fast charging"},
+    {"category": "Kecantikan", "keyword": "skincare"},
+    {"category": "Kecantikan", "keyword": "sunscreen"},
+    {"category": "Fashion Wanita", "keyword": "tas wanita"},
+    {"category": "Fashion Pria", "keyword": "kaos pria"},
+    {"category": "Ibu & Bayi", "keyword": "perlengkapan bayi"},
+    {"category": "Olahraga", "keyword": "alat olahraga rumah"}
+  ]
+}

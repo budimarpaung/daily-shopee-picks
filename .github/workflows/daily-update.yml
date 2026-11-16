@@ -1,0 +1,52 @@
+name: Generate Daily Product Picks
+
+on:
+  schedule:
+    # 22:00 UTC = 05:00 WIB
+    - cron: "0 22 * * *"
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "Sumber data (auto/api/csv)"
+        default: "auto"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-picks
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run tests
+        run: python -m unittest discover -s tests
+
+      - name: Research Shopee & generate picks
+        env:
+          SHOPEE_APP_ID: ${{ secrets.SHOPEE_APP_ID }}
+          SHOPEE_APP_SECRET: ${{ secrets.SHOPEE_APP_SECRET }}
+          PICKS_SOURCE: ${{ github.event.inputs.source || 'auto' }}
+        run: python scripts/generate_daily_picks.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/products.json data/history
+          if git diff --cached --quiet; then
+            echo "Tidak ada perubahan data."
+          else
+            git commit -m "chore: daily picks $(TZ=Asia/Jakarta date +%F)"
+            git push
+          fi
