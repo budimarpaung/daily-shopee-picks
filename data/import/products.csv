@@ -1,0 +1,4 @@
+name,category,price,commission_rate,sales,rating,review_count,image_url,product_url,affiliate_url
+Contoh Mini Chopper,Peralatan Rumah,59000,8,1250,4.8,320,https://placehold.co/600x600?text=Chopper,https://shopee.co.id/product/contoh-chopper,https://shopee.co.id/product/contoh-chopper
+Contoh Organizer Rumah,Home & Living,35000,10,840,4.7,180,https://placehold.co/600x600?text=Organizer,https://shopee.co.id/product/contoh-organizer,https://shopee.co.id/product/contoh-organizer
+Contoh Kipas Portable,Elektronik,45000,5,2200,4.9,540,https://placehold.co/600x600?text=Fan,https://shopee.co.id/product/contoh-fan,https://shopee.co.id/product/contoh-fan

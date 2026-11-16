@@ -1,0 +1,20 @@
+:root{--ink:#182230;--muted:#667085;--line:#e8edf2;--brand:#ee4d2d;--soft:#fff5f1}
+*{box-sizing:border-box}body{background:#f7f8fa;color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.navbar-brand{letter-spacing:-.3px}.brand-mark{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--brand);color:white;margin-right:7px}
+.hero{background:linear-gradient(120deg,#fff 0%,#fff5f1 100%);border:1px solid #f4e5df;border-radius:20px}
+.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:1.5px;color:var(--brand)}
+.date-chip,.stat-card,.method-note{background:#fff;border:1px solid var(--line);border-radius:14px}
+.date-chip{padding:12px 16px;display:flex;flex-direction:column;gap:3px;min-width:155px}.date-chip strong{font-size:1rem}
+.stat-card{padding:17px;height:100%;display:flex;flex-direction:column;gap:5px}.stat-card span{font-size:.78rem;color:var(--muted)}.stat-card strong{font-size:1.55rem;letter-spacing:-.5px}
+.product-card{height:100%;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .15s ease,box-shadow .15s ease}
+.product-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px #1822300d}
+.product-image{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;padding:12px}
+.product-body{padding:14px}.product-title{font-size:.94rem;font-weight:700;line-height:1.4;min-height:2.6em}
+.product-price{font-size:1.12rem;font-weight:800;margin:8px 0 4px}.meta{font-size:.78rem;color:var(--muted)}
+.score-pill{background:#e9f8ef;color:#167342;font-size:.76rem;font-weight:800;padding:5px 9px;border-radius:999px}
+.category-pill{background:#f1f3f5;color:#475467;font-size:.72rem;padding:5px 8px;border-radius:999px}
+.reason{font-size:.8rem;color:#475467;min-height:3.1em;margin:10px 0}
+.btn-aff{background:var(--brand);border-color:var(--brand);color:white;font-weight:700}.btn-aff:hover{background:#d94325;color:white}
+.empty-state{background:#fff;border:1px dashed #d0d5dd;border-radius:14px;padding:36px;text-align:center;color:var(--muted)}
+.method-note{background:#fff}.method-note b{color:var(--brand)}
+@media(max-width:575px){.hero h1{font-size:1.8rem}.date-chip{width:100%}#category-filter{max-width:150px}}

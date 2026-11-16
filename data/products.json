@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-11-16",
+  "updated_at": "08:16 WIB",
+  "total_candidates": 3,
+  "products": [
+    {
+      "name": "Contoh Organizer Rumah",
+      "category": "Home & Living",
+      "price": 35000.0,
+      "commission_rate": 10.0,
+      "sales": 840.0,
+      "rating": 4.7,
+      "review_count": 180,
+      "image_url": "https://placehold.co/600x600?text=Organizer",
+      "product_url": "https://shopee.co.id/product/contoh-organizer",
+      "affiliate_url": "https://shopee.co.id/product/contoh-organizer",
+      "score": 93,
+      "score_breakdown": {
+        "popularitas": 88,
+        "komisi": 100,
+        "rating": 94,
+        "harga": 92
+      },
+      "recommendation_reason": "Kandidat menarik: memiliki data penjualan, komisi 10%, rating tinggi, harga relatif terjangkau."
+    },
+    {
+      "name": "Contoh Mini Chopper",
+      "category": "Peralatan Rumah",
+      "price": 59000.0,
+      "commission_rate": 8.0,
+      "sales": 1250.0,
+      "rating": 4.8,
+      "review_count": 320,
+      "image_url": "https://placehold.co/600x600?text=Chopper",
+      "product_url": "https://shopee.co.id/product/contoh-chopper",
+      "affiliate_url": "https://shopee.co.id/product/contoh-chopper",
+      "score": 91,
+      "score_breakdown": {
+        "popularitas": 93,
+        "komisi": 80,
+        "rating": 96,
+        "harga": 100
+      },
+      "recommendation_reason": "Kandidat menarik: memiliki data penjualan, komisi 8%, rating tinggi, harga relatif terjangkau."
+    },
+    {
+      "name": "Contoh Kipas Portable",
+      "category": "Elektronik",
+      "price": 45000.0,
+      "commission_rate": 5.0,
+      "sales": 2200.0,
+      "rating": 4.9,
+      "review_count": 540,
+      "image_url": "https://placehold.co/600x600?text=Fan",
+      "product_url": "https://shopee.co.id/product/contoh-fan",
+      "affiliate_url": "https://shopee.co.id/product/contoh-fan",
+      "score": 84,
+      "score_breakdown": {
+        "popularitas": 100,
+        "komisi": 50,
+        "rating": 98,
+        "harga": 96
+      },
+      "recommendation_reason": "Kandidat menarik: memiliki data penjualan, komisi 5%, rating tinggi, harga relatif terjangkau."
+    }
+  ]
+}
