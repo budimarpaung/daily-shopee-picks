@@ -4,6 +4,7 @@ const SOURCES = {
   shopee_api: "Live dari Shopee Affiliate API",
   api: "Live dari Shopee Affiliate API",
   csv: "Data impor CSV manual",
+  sheet: "Data dari Google Sheets",
 };
 let allProducts = [];
 

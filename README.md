@@ -21,7 +21,7 @@ GitHub Actions (05.00 WIB)
 | `scripts/generate_daily_picks.py` | Riset → skor → `data/products.json` |
 | `scripts/scoring.py` | Rumus skor |
 | `data/history/` | Riwayat harian & snapshot penjualan (untuk momentum dan rotasi) |
-| `data/import/products.csv` | Sumber cadangan manual bila API belum aktif |
+| `data/import/products.csv` | Sumber cadangan manual bila API belum aktif (atau pakai Google Sheets, lihat bagian 2b) |
 | `.github/workflows/daily-update.yml` | Jadwal harian 05.00 WIB |
 | `tests/` | Tes end-to-end dengan mock Shopee API |
 
@@ -44,7 +44,20 @@ Repository → **Settings → Secrets and variables → Actions → New reposito
 
 Lalu buka tab **Actions → Generate Daily Product Picks → Run workflow** untuk uji coba pertama. Setelah itu workflow berjalan otomatis setiap hari pukul 05.00 WIB, commit `data/products.json`, dan Cloudflare Pages melakukan deploy ulang.
 
-Kalau secrets belum diisi, workflow otomatis memakai `data/import/products.csv` (mode cadangan). Kalau API error dan tidak ada produk sama sekali, workflow **gagal tanpa menimpa data kemarin**, jadi website tidak pernah kosong.
+Kalau secrets belum diisi, workflow otomatis memakai mode CSV: Google Sheets (bagian 2b) bila sudah diatur, atau `data/import/products.csv`. Kalau API error dan tidak ada produk sama sekali, workflow **gagal tanpa menimpa data kemarin**, jadi website tidak pernah kosong.
+
+## 2b. Mode cadangan: kelola produk lewat Google Sheets
+
+Selama akses API belum disetujui, daftar kandidat bisa dikelola di Google Sheets tanpa commit ke GitHub. Workflow mengunduh sheet ini setiap pagi.
+
+1. Buat Google Sheet dengan baris pertama berisi kolom yang sama dengan `data/import/products.csv`:
+   `name, category, price, commission_rate, sales, rating, review_count, image_url, product_url, affiliate_url` (opsional: `shop_name`, `item_id`).
+   Angka ditulis polos tanpa titik ribuan atau "Rp", misalnya `59000`, `8`, `4.8`.
+2. Isi sebanyak mungkin kandidat (disarankan 100–200 produk), supaya rotasi harian punya cukup pilihan.
+3. **File → Bagikan → Publikasikan ke web** → pilih tab sheet produk → format **Nilai yang dipisahkan koma (.csv)** → **Publikasikan**. Salin URL-nya (diawali `https://docs.google.com/spreadsheets/d/e/...output=csv`).
+4. Repository → **Settings → Secrets and variables → Actions → tab Variables → New repository variable**: Name `PRODUCTS_CSV_URL`, Value URL tadi.
+
+Perubahan di sheet ikut terpakai pada run berikutnya. Kalau unduhan gagal (URL salah, sheet belum dipublikasikan), workflow memakai `data/import/products.csv` dan mencatat peringatan di `warnings`. Catatan: sheet yang dipublikasikan bisa dibaca siapa pun yang tahu URL-nya, jadi jangan isi data rahasia.
 
 ## 3. Atur riset di `config/research.json`
 
@@ -76,7 +89,7 @@ Opsi global: `top_n` (jumlah rekomendasi), `max_per_category`, `max_per_shop`, `
 
 Setelah itu:
 
-- **Freshness**: produk yang sudah tampil dalam 3 hari terakhir dikurangi 7% per kemunculan, supaya daftar berganti setiap hari.
+- **Freshness**: produk yang sudah tampil dalam 7 hari terakhir dikurangi 15% per kemunculan (maksimal 50%), supaya daftar berganti setiap hari.
 - **Keberagaman**: maksimal 5 produk per kategori dan 2 per toko.
 
 Momentum baru aktif mulai hari kedua, setelah ada snapshot pembanding. Skor adalah alat bantu menyaring kandidat, bukan jaminan penjualan.

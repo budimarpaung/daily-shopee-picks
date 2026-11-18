@@ -15,9 +15,9 @@
   },
 
   "freshness": {
-    "_info": "Produk yang sudah tampil dalam N hari terakhir diberi penalti skor supaya rekomendasi berganti tiap hari.",
-    "lookback_days": 3,
-    "penalty_per_appearance": 0.07
+    "_info": "Produk yang sudah tampil dalam N hari terakhir diberi penalti skor supaya rekomendasi berganti tiap hari. Penalti = jumlah tampil x penalty_per_appearance, maksimal 50%.",
+    "lookback_days": 7,
+    "penalty_per_appearance": 0.15
   },
 
   "defaults": {

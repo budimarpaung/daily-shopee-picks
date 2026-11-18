@@ -141,5 +141,52 @@ class PipelineTest(unittest.TestCase):
         self.assertTrue(any(p["is_new"] for p in picks2) or len(picks2) == n)
 
 
+    def test_csv_from_url_and_fallback(self):
+        csv_text = "name,category,price,commission_rate,sales,rating\nSheet A,Dapur,50000,8,900,4.8\nSheet B,Rumah,30000,5,400,4.6\n"
+
+        class CsvHandler(BaseHTTPRequestHandler):
+            def log_message(self, *a):
+                pass
+
+            def do_GET(self):
+                body = csv_text.encode() if self.path == "/ok.csv" else b"<html>login</html>"
+                self.send_response(200)
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+        srv = HTTPServer(("127.0.0.1", 0), CsvHandler)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        base = f"http://127.0.0.1:{srv.server_port}"
+        try:
+            os.environ[gen.CSV_URL_ENV] = base + "/ok.csv"
+            products, origin, warnings = gen.fetch_from_csv()
+            self.assertEqual(origin, "sheet")
+            self.assertEqual([p["name"] for p in products], ["Sheet A", "Sheet B"])
+            self.assertFalse(warnings)
+
+            os.environ[gen.CSV_URL_ENV] = base + "/not-published"
+            products, origin, warnings = gen.fetch_from_csv()
+            self.assertEqual(origin, "csv")
+            self.assertTrue(products)
+            self.assertIn("HTML", warnings[0])
+        finally:
+            os.environ.pop(gen.CSV_URL_ENV, None)
+            srv.shutdown()
+
+    def test_freshness_rotates_daily(self):
+        cfg = gen.load_config()
+        cfg["top_n"], cfg["max_per_category"], cfg["max_per_shop"] = 3, 10, 10
+        pool = [{"id": str(i), "name": f"P{i}", "category": "X", "price": 50000, "commission_rate": 8,
+                 "commission_amount": None, "sales": 1000 - i * 10, "rating": 4.8, "source": "csv"}
+                for i in range(12)]
+        d = date(2026, 11, 20)
+        seen_days = []
+        for k in range(3):
+            picks, _ = gen.rank([dict(p) for p in pool], cfg, d + timedelta(days=k), strict_filters=False)
+            gen.save_history(pool, picks, d + timedelta(days=k))
+            seen_days.append({p["name"] for p in picks})
+        self.assertNotEqual(seen_days[0], seen_days[1], "picks should change the next day")
+
 if __name__ == "__main__":
     unittest.main()

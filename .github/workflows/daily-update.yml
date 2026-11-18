@@ -37,6 +37,8 @@ jobs:
           SHOPEE_APP_ID: ${{ secrets.SHOPEE_APP_ID }}
           SHOPEE_APP_SECRET: ${{ secrets.SHOPEE_APP_SECRET }}
           PICKS_SOURCE: ${{ github.event.inputs.source || 'auto' }}
+          # Google Sheets 'Publish to web' -> CSV. Atur di Settings > Secrets and variables > Actions > Variables
+          PRODUCTS_CSV_URL: ${{ vars.PRODUCTS_CSV_URL }}
         run: python scripts/generate_daily_picks.py
 
       - name: Commit updated data

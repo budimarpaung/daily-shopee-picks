@@ -2,7 +2,8 @@
 
 Sources:
   api   -> live research via the official Shopee Affiliate Open API
-  csv   -> manual data in data/import/products.csv
+  csv   -> manual data: Google Sheets published as CSV (env PRODUCTS_CSV_URL),
+           falling back to data/import/products.csv
   auto  -> api when SHOPEE_APP_ID & SHOPEE_APP_SECRET are set, else csv (default)
 
 Usage:
@@ -17,6 +18,8 @@ import csv
 import json
 import os
 import sys
+import urllib.parse
+import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -31,6 +34,8 @@ OUTPUT_PATH = ROOT / "data" / "products.json"
 HISTORY_DIR = ROOT / "data" / "history"
 SNAPSHOT_PATH = HISTORY_DIR / "sales_snapshot.json"
 HISTORY_KEEP_DAYS = 30
+CSV_URL_ENV = "PRODUCTS_CSV_URL"
+CSV_MAX_BYTES = 5 * 1024 * 1024
 WIB = timezone(timedelta(hours=7))
 
 SORT_MAP = {
@@ -143,11 +148,46 @@ def fetch_from_api(cfg) -> tuple[list[dict], list[str]]:
     return products, warnings
 
 
-def fetch_from_csv() -> list[dict]:
+def download_csv(url: str) -> list[dict]:
+    """Download a CSV (e.g. Google Sheets 'Publish to web' -> CSV) and parse it."""
+    parsed = urllib.parse.urlparse(url)
+    local = parsed.hostname in ("127.0.0.1", "localhost")
+    if parsed.scheme != "https" and not (parsed.scheme == "http" and local):
+        raise ValueError("URL harus diawali https://")
+    req = urllib.request.Request(url, headers={"User-Agent": "daily-shopee-picks"})
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = resp.read(CSV_MAX_BYTES + 1)
+    if len(data) > CSV_MAX_BYTES:
+        raise ValueError("file CSV lebih dari 5 MB")
+    text = data.decode("utf-8-sig")
+    if text.lstrip().startswith("<"):
+        raise ValueError("yang terunduh adalah halaman HTML, bukan CSV. Pastikan sheet di-'Publish to web' dengan format CSV")
+    rows = list(csv.DictReader(text.splitlines()))
+    if not rows or "name" not in rows[0]:
+        raise ValueError("CSV kosong atau tidak punya kolom 'name'")
+    return rows
+
+
+def load_csv_rows() -> tuple[list[dict], str, list[str]]:
+    """Return (rows, origin, warnings). origin is 'sheet' or 'csv'."""
+    warnings: list[str] = []
+    url = os.environ.get(CSV_URL_ENV, "").strip()
+    if url:
+        try:
+            rows = download_csv(url)
+            print(f"CSV diunduh dari {CSV_URL_ENV}: {len(rows)} baris")
+            return rows, "sheet", warnings
+        except Exception as e:  # network error, bad URL, unpublished sheet...
+            warnings.append(f"Gagal mengunduh {CSV_URL_ENV} ({e}); memakai {CSV_PATH.name} di repository.")
+            print("PERINGATAN:", warnings[-1])
     if not CSV_PATH.exists():
         raise SystemExit(f"CSV tidak ditemukan: {CSV_PATH}")
     with CSV_PATH.open("r", encoding="utf-8-sig", newline="") as f:
-        rows = list(csv.DictReader(f))
+        return list(csv.DictReader(f)), "csv", warnings
+
+
+def fetch_from_csv() -> tuple[list[dict], str, list[str]]:
+    rows, origin, warnings = load_csv_rows()
     products = []
     for row in rows:
         name = (row.get("name") or "").strip()
@@ -167,9 +207,9 @@ def fetch_from_csv() -> list[dict]:
             "image_url": (row.get("image_url") or "").strip(),
             "product_url": (row.get("product_url") or "").strip(),
             "affiliate_url": (row.get("affiliate_url") or "").strip(),
-            "source": "csv",
+            "source": origin,
         })
-    return products
+    return products, origin, warnings
 
 
 # ------------------------------------------------------------------ ranking
@@ -355,7 +395,7 @@ def main():
             raise SystemExit("Shopee API tidak mengembalikan produk. products.json tidak diubah.\n" + "\n".join(warnings))
         picks, n_candidates = rank(raw, cfg, today, strict_filters=True)
     else:
-        raw = fetch_from_csv()
+        raw, source, warnings = fetch_from_csv()
         # CSV is curated manually -> don't drop rows with strict filters
         picks, n_candidates = rank(raw, cfg, today, strict_filters=False)
 
