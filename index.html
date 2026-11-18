@@ -21,7 +21,8 @@
       <div>
         <span class="eyebrow">DAILY PRODUCT RESEARCH</span>
         <h1 class="display-6 fw-bold mt-2 mb-2">Temukan produk potensial hari ini.</h1>
-        <p class="text-secondary mb-0">Pilihan produk lintas kategori berdasarkan data produk yang kamu impor.</p>
+        <p class="text-secondary mb-0">Riset otomatis setiap pagi dari Shopee Affiliate: penjualan, komisi, rating, dan tren.</p>
+        <span id="source-badge" class="source-badge mt-2"></span>
       </div>
       <div class="date-chip"><span class="small text-secondary">Tanggal rekomendasi</span><strong id="generated-date">Memuat...</strong></div>
     </div>
@@ -30,7 +31,7 @@
   <section class="row g-3 mb-4" id="summary">
     <div class="col-6 col-lg-3"><div class="stat-card"><span>Total rekomendasi</span><strong id="stat-total">—</strong></div></div>
     <div class="col-6 col-lg-3"><div class="stat-card"><span>Kategori terwakili</span><strong id="stat-categories">—</strong></div></div>
-    <div class="col-6 col-lg-3"><div class="stat-card"><span>Rata-rata skor</span><strong id="stat-score">—</strong></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-card"><span>Baru hari ini</span><strong id="stat-new">—</strong></div></div>
     <div class="col-6 col-lg-3"><div class="stat-card"><span>Data diperbarui</span><strong id="stat-updated">—</strong></div></div>
   </section>
 
@@ -39,14 +40,17 @@
       <h2 class="h4 fw-bold mb-1">Rekomendasi hari ini</h2>
       <p class="text-secondary small mb-0">Urutan berdasarkan skor rekomendasi, bukan besaran komisi saja.</p>
     </div>
-    <div class="d-flex gap-2">
-      <select id="category-filter" class="form-select form-select-sm" aria-label="Filter kategori">
+    <div class="d-flex flex-wrap gap-2">
+      <input id="search" type="search" class="form-control form-control-sm" placeholder="Cari produk…" aria-label="Cari produk">
+      <select id="category-filter" class="form-select form-select-sm w-auto" aria-label="Filter kategori">
         <option value="">Semua kategori</option>
       </select>
-      <select id="sort-filter" class="form-select form-select-sm" aria-label="Urutkan produk">
+      <select id="sort-filter" class="form-select form-select-sm w-auto" aria-label="Urutkan produk">
         <option value="score">Skor tertinggi</option>
         <option value="commission">Komisi tertinggi</option>
+        <option value="commission-amount">Komisi Rp tertinggi</option>
         <option value="sales">Penjualan tertinggi</option>
+        <option value="trend">Tren naik</option>
         <option value="price-low">Harga terendah</option>
       </select>
     </div>
@@ -59,12 +63,12 @@
 
   <section class="method-note mt-5 p-3 p-md-4">
     <h3 class="h6 fw-bold">Bagaimana skor dihitung?</h3>
-    <p class="small text-secondary mb-2">Skor awal merupakan indikator bantu berdasarkan data yang tersedia: popularitas/penjualan, komisi, rating, dan keterjangkauan harga. Skor bukan jaminan penjualan atau pendapatan.</p>
-    <div class="d-flex flex-wrap gap-3 small">
-      <span><b>35%</b> Popularitas</span><span><b>30%</b> Komisi</span><span><b>20%</b> Rating</span><span><b>15%</b> Harga</span>
+    <p class="small text-secondary mb-2">Skor merupakan indikator bantu dari data riset harian: popularitas/penjualan, komisi (persen dan estimasi Rupiah), rating, keterjangkauan harga, dan momentum penjualan dibanding hari sebelumnya. Produk yang sudah tampil beberapa hari terakhir diberi penalti kecil agar rekomendasi berganti. Skor bukan jaminan penjualan atau pendapatan.</p>
+    <div id="weights" class="d-flex flex-wrap gap-3 small">
+      <span><b>30%</b> Popularitas</span><span><b>30%</b> Komisi</span><span><b>20%</b> Rating</span><span><b>10%</b> Harga</span><span><b>10%</b> Momentum</span>
     </div>
   </section>
-  <footer class="text-center text-secondary small py-4">Daily Shopee Picks · Data bersumber dari file impor pengguna.</footer>
+  <footer class="text-center text-secondary small py-4">Daily Shopee Picks · <span id="footer-source">Data riset harian</span> · Harga dan komisi dapat berubah sewaktu-waktu.</footer>
 </main>
 <script src="assets/js/app.js"></script>
 </body>
