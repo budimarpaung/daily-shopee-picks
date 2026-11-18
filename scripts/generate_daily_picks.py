@@ -148,8 +148,38 @@ def fetch_from_api(cfg) -> tuple[list[dict], list[str]]:
     return products, warnings
 
 
+def normalize_csv_url(url: str) -> str:
+    """Turn Google Drive / Google Sheets share links into direct CSV download links.
+
+    - drive.google.com/file/d/<ID>/view...      -> drive.google.com/uc?export=download&id=<ID>
+    - drive.google.com/open?id=<ID>             -> same
+    - docs.google.com/spreadsheets/d/<ID>/edit#gid=<G> -> .../d/<ID>/export?format=csv&gid=<G>
+    Other URLs (e.g. 'Publish to web' links ending in output=csv) are returned unchanged.
+    """
+    parsed = urllib.parse.urlparse(url)
+    host = (parsed.hostname or "").lower()
+    parts = [x for x in parsed.path.split("/") if x]
+    query = urllib.parse.parse_qs(parsed.query)
+    if host == "drive.google.com":
+        file_id = None
+        if len(parts) >= 3 and parts[0] == "file" and parts[1] == "d":
+            file_id = parts[2]
+        elif query.get("id"):
+            file_id = query["id"][0]
+        if file_id:
+            return "https://drive.google.com/uc?export=download&id=" + urllib.parse.quote(file_id)
+    if host == "docs.google.com" and len(parts) >= 3 and parts[:2] == ["spreadsheets", "d"] and parts[2] != "e":
+        gid = (query.get("gid") or [None])[0]
+        if not gid and parsed.fragment.startswith("gid="):
+            gid = parsed.fragment[4:]
+        out = f"https://docs.google.com/spreadsheets/d/{parts[2]}/export?format=csv"
+        return out + (f"&gid={urllib.parse.quote(gid)}" if gid else "")
+    return url
+
+
 def download_csv(url: str) -> list[dict]:
-    """Download a CSV (e.g. Google Sheets 'Publish to web' -> CSV) and parse it."""
+    """Download a CSV (Google Drive file, Google Sheets, or any https URL) and parse it."""
+    url = normalize_csv_url(url)
     parsed = urllib.parse.urlparse(url)
     local = parsed.hostname in ("127.0.0.1", "localhost")
     if parsed.scheme != "https" and not (parsed.scheme == "http" and local):
@@ -161,7 +191,7 @@ def download_csv(url: str) -> list[dict]:
         raise ValueError("file CSV lebih dari 5 MB")
     text = data.decode("utf-8-sig")
     if text.lstrip().startswith("<"):
-        raise ValueError("yang terunduh adalah halaman HTML, bukan CSV. Pastikan sheet di-'Publish to web' dengan format CSV")
+        raise ValueError("yang terunduh adalah halaman HTML, bukan CSV. Pastikan file dibagikan 'Siapa saja yang memiliki link' (Drive/Sheets) atau di-'Publish to web' sebagai CSV")
     rows = list(csv.DictReader(text.splitlines()))
     if not rows or "name" not in rows[0]:
         raise ValueError("CSV kosong atau tidak punya kolom 'name'")

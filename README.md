@@ -54,10 +54,14 @@ Selama akses API belum disetujui, daftar kandidat bisa dikelola di Google Sheets
    `name, category, price, commission_rate, sales, rating, review_count, image_url, product_url, affiliate_url` (opsional: `shop_name`, `item_id`).
    Angka ditulis polos tanpa titik ribuan atau "Rp", misalnya `59000`, `8`, `4.8`.
 2. Isi sebanyak mungkin kandidat (disarankan 100–200 produk), supaya rotasi harian punya cukup pilihan.
-3. **File → Bagikan → Publikasikan ke web** → pilih tab sheet produk → format **Nilai yang dipisahkan koma (.csv)** → **Publikasikan**. Salin URL-nya (diawali `https://docs.google.com/spreadsheets/d/e/...output=csv`).
-4. Repository → **Settings → Secrets and variables → Actions → tab Variables → New repository variable**: Name `PRODUCTS_CSV_URL`, Value URL tadi.
+3. Bagikan file supaya bisa diunduh workflow. Salah satu dari:
+   - **Google Sheet**: Bagikan → Akses umum **Siapa saja yang memiliki link** (Pelihat) → salin link (`https://docs.google.com/spreadsheets/d/.../edit...`). Untuk tab selain tab pertama, salin link saat tab itu terbuka (berisi `#gid=`).
+   - **File .csv di Google Drive**: Bagikan → **Siapa saja yang memiliki link** → salin link (`https://drive.google.com/file/d/.../view...`). Saat memperbarui, pakai **Kelola versi → Upload versi baru** supaya link tetap sama. (Membuka CSV dengan Google Sheets lalu mengedit membuat file Sheets baru; file CSV aslinya tidak ikut berubah.)
+   - **Publikasikan ke web** sebagai CSV (link `.../pub?output=csv`).
+   Link berbagi Drive/Sheets otomatis diubah ke link unduhan CSV oleh generator.
+4. Repository → **Settings → Secrets and variables → Actions → tab Variables → New repository variable**: Name `PRODUCTS_CSV_URL`, Value link tadi.
 
-Perubahan di sheet ikut terpakai pada run berikutnya. Kalau unduhan gagal (URL salah, sheet belum dipublikasikan), workflow memakai `data/import/products.csv` dan mencatat peringatan di `warnings`. Catatan: sheet yang dipublikasikan bisa dibaca siapa pun yang tahu URL-nya, jadi jangan isi data rahasia.
+Perubahan di sheet ikut terpakai pada run berikutnya. Kalau unduhan gagal (URL salah, file belum dibagikan), workflow memakai `data/import/products.csv` dan mencatat peringatan di `warnings`. Catatan: file yang dibagikan dengan link bisa dibaca siapa pun yang tahu URL-nya, jadi jangan isi data rahasia.
 
 ## 3. Atur riset di `config/research.json`
 

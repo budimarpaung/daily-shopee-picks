@@ -174,6 +174,19 @@ class PipelineTest(unittest.TestCase):
             os.environ.pop(gen.CSV_URL_ENV, None)
             srv.shutdown()
 
+    def test_normalize_google_urls(self):
+        n = gen.normalize_csv_url
+        self.assertEqual(n("https://drive.google.com/file/d/AbC_123/view?usp=sharing"),
+                         "https://drive.google.com/uc?export=download&id=AbC_123")
+        self.assertEqual(n("https://drive.google.com/open?id=XyZ"),
+                         "https://drive.google.com/uc?export=download&id=XyZ")
+        self.assertEqual(n("https://docs.google.com/spreadsheets/d/SID/edit#gid=42"),
+                         "https://docs.google.com/spreadsheets/d/SID/export?format=csv&gid=42")
+        self.assertEqual(n("https://docs.google.com/spreadsheets/d/SID/edit?usp=sharing"),
+                         "https://docs.google.com/spreadsheets/d/SID/export?format=csv")
+        pub = "https://docs.google.com/spreadsheets/d/e/2PACX-abc/pub?output=csv"
+        self.assertEqual(n(pub), pub)
+
     def test_freshness_rotates_daily(self):
         cfg = gen.load_config()
         cfg["top_n"], cfg["max_per_category"], cfg["max_per_shop"] = 3, 10, 10
