@@ -20,6 +20,7 @@ GitHub Actions (05.00 WIB)
 | `scripts/shopee_api.py` | Klien Shopee Affiliate Open API (signature SHA256, retry, rate limit) |
 | `scripts/generate_daily_picks.py` | Riset → skor → `data/products.json` |
 | `scripts/scoring.py` | Rumus skor |
+| `scripts/curate_exports.py` | Kurasi mingguan dari file ekspor "Link Produk Sekaligus" (bagian 2c) |
 | `data/history/` | Riwayat harian & snapshot penjualan (untuk momentum dan rotasi) |
 | `data/import/products.csv` | Sumber cadangan manual bila API belum aktif (atau pakai Google Sheets, lihat bagian 2b) |
 | `.github/workflows/daily-update.yml` | Jadwal harian 05.00 WIB |
@@ -62,6 +63,21 @@ Selama akses API belum disetujui, daftar kandidat bisa dikelola di Google Sheets
 4. Repository → **Settings → Secrets and variables → Actions → tab Variables → New repository variable**: Name `PRODUCTS_CSV_URL`, Value link tadi.
 
 Perubahan di sheet ikut terpakai pada run berikutnya. Kalau unduhan gagal (URL salah, file belum dibagikan), workflow memakai `data/import/products.csv` dan mencatat peringatan di `warnings`. Catatan: file yang dibagikan dengan link bisa dibaca siapa pun yang tahu URL-nya, jadi jangan isi data rahasia.
+
+## 2c. Kurasi mingguan: 10 produk per kategori dari ekspor Shopee Affiliate
+
+Tanpa API, sumber data paling praktis adalah file ekspor resmi **"Link Produk Sekaligus"**.
+
+1. Di [affiliate.shopee.co.id](https://affiliate.shopee.co.id) → **Penawaran → Penawaran Produk**, cari satu kata kunci dari `config/research.json` (mis. `rak dapur`), urutkan **Terlaris**.
+2. Centang **Pilih semua produk di halaman ini** → ambil link sekaligus → unduh CSV-nya (`LinkProdukSekaligus....csv`). Ulangi untuk kata kunci lain.
+3. Jalankan:
+   ```bash
+   python scripts/curate_exports.py ~/Downloads/LinkProdukSekaligus*.csv -o produk_kurasi.csv
+   ```
+   Script mendeteksi kategori tiap file, menyaring dengan `filters` di config (komisi, harga, penjualan, kata terlarang), membuang duplikat, membatasi 2 produk per toko, lalu memilih **10 terbaik per kategori** (`-n` untuk mengubah jumlahnya). Ringkasan per file dan per kategori dicetak di layar.
+4. Buka Google Sheet → **File → Impor → Upload** `produk_kurasi.csv` → **Ganti sheet saat ini**. Website memakai data baru pada run berikutnya.
+
+Kalau sebuah file terdeteksi sebagai `Lainnya`, ganti nama filenya agar memuat kata kunci atau nama kategori (mis. `skincare.csv`, `Kecantikan.csv`), lalu jalankan ulang. Harga di file ekspor dibulatkan (mis. `14,4RB`), jadi bisa selisih beberapa puluh rupiah.
 
 ## 3. Atur riset di `config/research.json`
 

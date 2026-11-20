@@ -17,6 +17,7 @@ import argparse
 import csv
 import json
 import os
+import re
 import sys
 import urllib.parse
 import urllib.request
@@ -57,8 +58,8 @@ def as_number(value, default=0.0):
     s = str(value).strip().replace("Rp", "").replace(" ", "")
     if not s:
         return default
-    # "1.250.000" (id-ID thousands) vs "4.8" / "0.25"
-    if s.count(".") > 1 or ("," in s and "." in s):
+    # "1.250.000" / "14.400" (id-ID thousands) vs "4.8" / "0.25"
+    if s.count(".") > 1 or ("," in s and "." in s) or re.fullmatch(r"\d{1,3}\.\d{3}", s):
         s = s.replace(".", "").replace(",", ".")
     else:
         s = s.replace(",", ".")
@@ -229,7 +230,7 @@ def fetch_from_csv() -> tuple[list[dict], str, list[str]]:
             "category": (row.get("category") or "Lainnya").strip(),
             "price": as_number(row.get("price")),
             "commission_rate": as_number(row.get("commission_rate")),
-            "commission_amount": None,
+            "commission_amount": as_number(row.get("commission_amount")) or None,
             "sales": as_number(row.get("sales")),
             "rating": as_number(row.get("rating")),
             "review_count": int(as_number(row.get("review_count"))) or None,
