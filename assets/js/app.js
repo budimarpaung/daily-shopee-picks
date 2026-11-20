@@ -48,7 +48,8 @@ function renderProducts() {
     const image = isHttp(p.image_url)
       ? `<img class="product-image" src="${safe(p.image_url)}" alt="${safe(p.name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.visibility='hidden'">`
       : `<div class="product-image d-grid place-items-center text-secondary">No image</div>`;
-    const link = [p.affiliate_url, p.product_url].find(isHttp) || "#";
+    // Website = papan ide konten: tautkan ke halaman produk Shopee, bukan link affiliate.
+    const link = [p.product_url, p.affiliate_url].find(isHttp) || "#";
     const commission = p.commission_rate
       ? `${number(p.commission_rate)}% komisi${p.commission_amount ? ` (±${rupiah(p.commission_amount)})` : ""}`
       : "Komisi belum tersedia";
@@ -68,9 +69,8 @@ function renderProducts() {
           <div class="meta">${compact(p.sales)} terjual${rating ? ` · ${rating}` : ""}</div>
           ${p.shop_name ? `<div class="meta shop">🏬 ${safe(p.shop_name)}</div>` : ""}
           <div class="reason">${safe(p.recommendation_reason || "Direkomendasikan berdasarkan kombinasi data produk.")}</div>
-          <div class="d-flex gap-2 mt-auto">
-            <a class="btn btn-aff btn-sm flex-grow-1" href="${safe(link)}" target="_blank" rel="noopener sponsored">Lihat produk ↗</a>
-            <button class="btn btn-outline-secondary btn-sm copy-btn" data-link="${safe(link)}" title="Salin link affiliate">⧉</button>
+          <div class="mt-auto">
+            <a class="btn btn-aff btn-sm w-100" href="${safe(link)}" target="_blank" rel="noopener noreferrer">Lihat di Shopee ↗</a>
           </div>
         </div>
       </article>
@@ -108,15 +108,6 @@ async function init() {
     renderProducts();
     ["category-filter", "sort-filter"].forEach(id => $(id).addEventListener("change", renderProducts));
     $("search").addEventListener("input", renderProducts);
-    $("product-grid").addEventListener("click", async e => {
-      const btn = e.target.closest(".copy-btn");
-      if (!btn) return;
-      try {
-        await navigator.clipboard.writeText(btn.dataset.link);
-        btn.textContent = "✓";
-      } catch { btn.textContent = "!"; }
-      setTimeout(() => (btn.textContent = "⧉"), 1500);
-    });
   } catch (error) {
     $("product-grid").innerHTML = `<div class="col-12"><div class="empty-state">${safe(error.message)}<br><small>Jalankan script generator terlebih dahulu. Lihat README.</small></div></div>`;
   }

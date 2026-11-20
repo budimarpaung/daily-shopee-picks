@@ -15,7 +15,7 @@ GitHub Actions (05.00 WIB)
 
 | File | Fungsi |
 |---|---|
-| `index.html`, `assets/` | Dashboard (cari, filter kategori, urutkan, salin link affiliate) |
+| `index.html`, `assets/` | Dashboard ide konten (cari, filter kategori, urutkan, buka halaman produk di Shopee) |
 | `config/research.json` | **Daftar riset harian**: keyword/kategori, filter, jumlah produk |
 | `scripts/shopee_api.py` | Klien Shopee Affiliate Open API (signature SHA256, retry, rate limit) |
 | `scripts/generate_daily_picks.py` | Riset → skor → `data/products.json` |
@@ -122,6 +122,6 @@ Framework preset: None · Build command: kosong · Output directory: `/`. Setiap
 ## Catatan
 
 - Data diambil dari API resmi Shopee Affiliate, bukan scraping. Scraping situs Shopee melanggar ketentuan dan rawan diblokir.
-- `offerLink` dari API sudah berupa link affiliate milikmu, jadi tombol "Lihat produk" langsung terlacak komisinya.
+- Website ini dipakai sebagai papan ide konten, jadi tombol "Lihat di Shopee" membuka halaman produk biasa (`product_url`). Link affiliate (`affiliate_url` / `offerLink`) tetap disimpan di data, tetapi tidak ditampilkan; buat link affiliate saat konten dipublikasikan. Kolom `affiliate_url` di CSV/Sheet boleh dikosongkan.
 - Harga, stok, dan komisi bisa berubah setelah data diambil.
 - GitHub Actions terjadwal bisa terlambat beberapa menit saat antrean padat.
