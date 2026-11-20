@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-19",
-  "updated_at": "09:53 WIB",
+  "generated_at": "2026-11-20",
+  "updated_at": "09:46 WIB",
   "source": "sheet",
   "total_fetched": 17,
   "total_candidates": 17,
-  "new_today": 17,
+  "new_today": 0,
   "weights": {
     "popularitas": 30,
     "komisi": 30,
@@ -30,17 +30,17 @@
       "affiliate_url": "https://s.shopee.co.id/20x827SyUJ",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 75,
+      "sales_growth_pct": 0.0,
+      "score": 62,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 100,
         "rating": 0,
         "harga": 99,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi tinggi 13.5%, harga ramah impulse-buy."
     },
     {
@@ -59,17 +59,17 @@
       "affiliate_url": "https://s.shopee.co.id/3qOmDULzlU",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 70,
+      "sales_growth_pct": 0.0,
+      "score": 58,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 85,
         "rating": 0,
         "harga": 92,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi tinggi 11.5%, harga ramah impulse-buy."
     },
     {
@@ -88,17 +88,17 @@
       "affiliate_url": "https://s.shopee.co.id/30pfDxPASH",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 69,
+      "sales_growth_pct": 0.0,
+      "score": 57,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 85,
         "rating": 0,
         "harga": 84,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi tinggi 11.5%, harga ramah impulse-buy."
     },
     {
@@ -117,17 +117,17 @@
       "affiliate_url": "https://s.shopee.co.id/3LSVcZNtmR",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 66,
+      "sales_growth_pct": 0.0,
+      "score": 54,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 70,
         "rating": 0,
         "harga": 95,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi tinggi 9.5%, harga ramah impulse-buy."
     },
     {
@@ -146,17 +146,17 @@
       "affiliate_url": "https://s.shopee.co.id/3VlvosNGRS",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 62,
+      "sales_growth_pct": 0.0,
+      "score": 51,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 56,
         "rating": 0,
         "harga": 99,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi 7.5%, harga ramah impulse-buy."
     },
     {
@@ -175,17 +175,17 @@
       "affiliate_url": "https://s.shopee.co.id/2gCopLQR8F",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 61,
+      "sales_growth_pct": 0.0,
+      "score": 50,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 56,
         "rating": 0,
         "harga": 93,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi 7.5%, harga ramah impulse-buy."
     },
     {
@@ -204,17 +204,17 @@
       "affiliate_url": "https://s.shopee.co.id/2BGYEQSL9K",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 61,
+      "sales_growth_pct": 0.0,
+      "score": 50,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 56,
         "rating": 0,
         "harga": 98,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi 7.5%, harga ramah impulse-buy."
     },
     {
@@ -233,17 +233,17 @@
       "affiliate_url": "https://s.shopee.co.id/2LZyQjRhoL",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 61,
+      "sales_growth_pct": 0.0,
+      "score": 50,
       "score_breakdown": {
         "popularitas": 99,
         "komisi": 56,
         "rating": 0,
         "harga": 96,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "9.000 terjual, komisi 7.5%, harga ramah impulse-buy."
     },
     {
@@ -262,17 +262,17 @@
       "affiliate_url": "https://s.shopee.co.id/50ajbdHYOb",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 60,
+      "sales_growth_pct": 0.0,
+      "score": 49,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 56,
         "rating": 0,
         "harga": 79,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi 7.5%, harga ramah impulse-buy."
     },
     {
@@ -291,17 +291,17 @@
       "affiliate_url": "https://s.shopee.co.id/4qHJPKIBja",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 59,
+      "sales_growth_pct": 0.0,
+      "score": 48,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 48,
         "rating": 0,
         "harga": 97,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi 6.5%, harga ramah impulse-buy."
     },
     {
@@ -320,17 +320,17 @@
       "affiliate_url": "https://s.shopee.co.id/4fxtD1Ip4Z",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 59,
+      "sales_growth_pct": 0.0,
+      "score": 48,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 48,
         "rating": 0,
         "harga": 99,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi 6.5%, harga ramah impulse-buy."
     },
     {
@@ -349,17 +349,17 @@
       "affiliate_url": "https://s.shopee.co.id/3B95QGOX7I",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 57,
+      "sales_growth_pct": 0.0,
+      "score": 47,
       "score_breakdown": {
         "popularitas": 87,
         "komisi": 56,
         "rating": 0,
         "harga": 97,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "3.000 terjual, komisi 7.5%, harga ramah impulse-buy."
     },
     {
@@ -378,17 +378,17 @@
       "affiliate_url": "https://s.shopee.co.id/2VtOd2R4TM",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 56,
+      "sales_growth_pct": 0.0,
+      "score": 46,
       "score_breakdown": {
         "popularitas": 96,
         "komisi": 41,
         "rating": 0,
         "harga": 98,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "7.000 terjual, komisi 5.5%, harga ramah impulse-buy."
     },
     {
@@ -407,17 +407,17 @@
       "affiliate_url": "https://s.shopee.co.id/1W0rRCUsV8",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 56,
+      "sales_growth_pct": 0.0,
+      "score": 46,
       "score_breakdown": {
         "popularitas": 83,
         "komisi": 56,
         "rating": 0,
         "harga": 98,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "2.000 terjual, komisi 7.5%, harga ramah impulse-buy."
     },
     {
@@ -436,17 +436,17 @@
       "affiliate_url": "https://s.shopee.co.id/3g5M1BMd6T",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 54,
+      "sales_growth_pct": 0.0,
+      "score": 44,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 34,
         "rating": 0,
         "harga": 90,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi 4.6%."
     },
     {
@@ -465,17 +465,17 @@
       "affiliate_url": "https://s.shopee.co.id/1gKHdVUFA9",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 53,
+      "sales_growth_pct": 0.0,
+      "score": 43,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 33,
         "rating": 0,
         "harga": 80,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi 4.5%, harga ramah impulse-buy."
     },
     {
@@ -494,17 +494,17 @@
       "affiliate_url": "https://s.shopee.co.id/1LhREtVVq7",
       "source": "sheet",
       "tags": [],
-      "sales_growth_pct": null,
-      "score": 50,
+      "sales_growth_pct": 0.0,
+      "score": 41,
       "score_breakdown": {
         "popularitas": 100,
         "komisi": 19,
         "rating": 0,
         "harga": 96,
-        "momentum": 50
+        "momentum": 30
       },
-      "days_featured_recently": 0,
-      "is_new": true,
+      "days_featured_recently": 1,
+      "is_new": false,
       "recommendation_reason": "10.000 terjual, komisi 2.5%, harga ramah impulse-buy."
     }
   ]
